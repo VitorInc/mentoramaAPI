@@ -1,4 +1,4 @@
-package br.com.mentoramaAlunos.demo;
+package br.com.mentoramaAlunos.demo.entity;
 
 public class Aluno {
 
