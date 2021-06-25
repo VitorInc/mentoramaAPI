@@ -2,7 +2,8 @@ package br.com.mentoramaAlunos.demo.controllers;
 
 
 
-import br.com.mentoramaAlunos.demo.Aluno;
+
+import br.com.mentoramaAlunos.demo.entity.Aluno;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

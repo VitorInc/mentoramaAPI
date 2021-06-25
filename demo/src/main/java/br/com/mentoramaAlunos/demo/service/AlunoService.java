@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class AlunoService {
-    private List<Aluno> alunoList;
+
 
     public AlunoService() {
         this.alunoList = new ArrayList<>();
@@ -46,6 +46,31 @@ public class AlunoService {
         return filteredById(id);
     }
 
+    public Aluno found(final Integer id){
+        if(insideList(id)){
+            return this.alunoList.get(id.intValue()-1);
+        }else {
+            throw new DidntFindExcept();
+        }
+    }
+
+    public Boolean register(Aluno aluno){
+        aluno.setId((int) this.alunoList.size()+1);
+        return this.alunoList.add(aluno);
+    }
+
+    public Boolean delete (Integer id){
+        if(insideList(id)){
+            this.alunoList.remove(id.intValue()-1);
+            return true;
+        }
+        return false;
+    }
+
+
+
+    private List<Aluno> alunoList;
+
     private List<Aluno> filteredById(Integer id) {
         return this.alunoList.stream().filter(aluno -> aluno.getId().equals(id)).collect(Collectors.toList());
     }
@@ -56,6 +81,25 @@ public class AlunoService {
 
     private List<Aluno> filteredByName(String nome) {
         return this.alunoList.stream().filter(aluno -> aluno.getNome().contains(nome)).collect(Collectors.toList());
+    }
+
+    private Boolean insideList(Integer id){
+        return ((this.alunoList.size() >= id)&& (id>0));
+    }
+
+    private Boolean updtName(Integer id, String nome){
+        if(nome != null){
+            this.alunoList.get(id.intValue()-1).setNome(nome);
+            return true;
+        }
+        return false;
+    }
+    private Boolean updtIdade(Integer id, Integer idade){
+        if(idade != null){
+            this.alunoList.get(id.intValue()-1).setIdade(idade);
+            return true;
+        }
+        return false;
     }
 
 }
