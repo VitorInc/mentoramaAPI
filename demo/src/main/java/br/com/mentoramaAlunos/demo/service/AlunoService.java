@@ -2,6 +2,7 @@ package br.com.mentoramaAlunos.demo.service;
 
 import br.com.mentoramaAlunos.demo.entity.Aluno;
 import br.com.mentoramaAlunos.demo.excepts.DidntFindExcept;
+import br.com.mentoramaAlunos.demo.excepts.DidntRegister;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -53,10 +54,21 @@ public class AlunoService {
             throw new DidntFindExcept();
         }
     }
+    public void update(Integer id, String nome,Integer idade){
+        if(insideList(id)){
+            updtName(id,nome);
+            updtIdade(id, idade);
+        }
+    }
 
-    public Boolean register(Aluno aluno){
+    public Aluno register(final Aluno aluno){
         aluno.setId((int) this.alunoList.size()+1);
-        return this.alunoList.add(aluno);
+        try {
+            this.alunoList.add(aluno);
+            return aluno;
+        }catch (NullPointerException e){
+            throw new DidntRegister();
+        }
     }
 
     public Boolean delete (Integer id){
